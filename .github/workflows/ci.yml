@@ -19,18 +19,7 @@ jobs:
       run: sudo apt install libssl-dev
     - name: Install clang-tidy
       run: sudo apt install clang-tidy
+    - name: Install cppcheck
+      run: sudo apt install cppcheck
     - name: Run cppcheck
       run: cppcheck --enable=all -I include/ cpr/
-    - name: "[Release g++] Build & Test"
-      env:
-        CPR_BUILD_TESTS: ON
-      uses: ashutoshvarma/action-cmake-build@master
-      with:
-        build-dir: ${{github.workspace}}/build
-        source-dir: ${{github.workspace}}
-        cc: clang
-        cxx: clang++
-        build-type: Release
-        run-test: true
-        ctest-options: -V
-        configure-options: -DCPR_ENABLE_LINTING=ON
